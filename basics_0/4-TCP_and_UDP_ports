@@ -1,4 +1,4 @@
 #!/bin/bash
 
 # Display listening sockets with the PID and program name
-ss -tulnp
+ss -l
