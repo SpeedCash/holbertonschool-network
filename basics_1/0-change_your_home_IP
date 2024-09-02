@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# Define the IP addresses and hostnames
+LOCALHOST_IP="127.0.0.2"
+FACEBOOK_IP="8.8.8.8"
+
+# Modify the /etc/hosts file to change localhost IP and add facebook.com
+sudo sed -i.bak '/127.0.0.1\s\+localhost/s/^/#/' /etc/hosts  # Comment out the original localhost line
+echo "$LOCALHOST_IP localhost" | sudo tee -a /etc/hosts > /dev/null  # Add new localhost entry
+
+# Check if facebook.com is already in the hosts file
+if grep -q "facebook.com" /etc/hosts; then
+    sudo sed -i "/facebook.com/c\\$FACEBOOK_IP facebook.com" /etc/hosts  # Update facebook.com entry if it exists
+else
+    echo "$FACEBOOK_IP facebook.com" | sudo tee -a /etc/hosts > /dev/null  # Add facebook.com entry if it doesn't exist
+fi
+
+echo "Changes applied. You may want to revert localhost to 127.0.0.1 if this is a persistent environment."
