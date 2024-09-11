@@ -1,0 +1,48 @@
+What Happens When You Type https://www.google.com in Your Browser and Press Enter?
+When you type https://www.google.com into your browser and press Enter, a complex series of steps unfolds to bring the Google homepage to your screen. Here's a detailed breakdown of the process, covering DNS requests, TCP/IP, firewalls, HTTPS/SSL, load balancers, web servers, application servers, and databases.
+
+1. DNS Request
+The journey begins with a DNS (Domain Name System) query. Here's what happens:
+
+User Input: You type https://www.google.com into your browser's address bar and press Enter.
+Local Check: The browser first checks the local hosts file on your system to see if there is a predefined entry for www.google.com. If not, it proceeds to the next step.
+DNS Resolver: The browser sends a request to the system's DNS resolver, which is usually provided by your ISP or configured in your network settings. The DNS resolver is responsible for translating the domain name into an IP address.
+Recursive DNS Query: The DNS resolver may perform a recursive DNS query. Here’s how it works:
+Root Servers: The resolver queries the root DNS servers to find the top-level domain (TLD) servers for .com.
+TLD Servers: The root servers respond with the IP address of the .com TLD servers.
+Authoritative Name Servers: The TLD servers are queried, and they respond with the IP address of Google's authoritative name servers.
+Authoritative Name Servers: The authoritative name servers are queried, and they return the IP address associated with www.google.com.
+2. TCP/IP
+Once the DNS resolver obtains the IP address, the browser can establish a connection to the server.
+
+TCP Handshake: The browser initiates a TCP (Transmission Control Protocol) handshake with the server at the obtained IP address. This involves a three-way handshake: SYN (synchronize), SYN-ACK (synchronize-acknowledgment), and ACK (acknowledgment).
+3. Firewall
+Before the request reaches the server, it may pass through various firewalls.
+
+Local Firewall: Your system's firewall may inspect the outgoing request to ensure it complies with the set rules.
+Network Firewalls: The request may also be checked by network firewalls, such as those at your ISP or the server's hosting environment, to block any malicious traffic.
+4. HTTPS/SSL
+Since the URL begins with https, the connection is encrypted using SSL/TLS (Secure Sockets Layer/Transport Layer Security).
+
+SSL/TLS Handshake: After the TCP handshake, an SSL/TLS handshake occurs to establish an encrypted connection. This involves exchanging certificates and agreeing on encryption parameters.
+5. Load Balancer
+To distribute the traffic efficiently and ensure high availability, the request is often directed to a load balancer.
+
+Load Balancing: The load balancer receives the request and forwards it to one of the available web servers. This helps in distributing the load across multiple servers, improving performance and reducing downtime.
+6. Web Server
+The load balancer directs the request to a web server.
+
+Request Processing: The web server receives the request and processes it. For static content, the server can directly serve the requested files. For dynamic content, the request is forwarded to an application server.
+7. Application Server
+For dynamic content, the request is handled by an application server.
+
+Application Logic: The application server executes the necessary application logic to generate the response. This may involve database queries or other backend operations.
+8. Database
+If the application server needs data to generate the response, it will query a database.
+
+Database Query: The application server sends a query to the database, which retrieves the required data. The data is then sent back to the application server, which uses it to generate the response.
+9. Response
+The response is constructed and sent back through the chain.
+
+Response Flow: The response flows back through the application server, web server, load balancer, and finally, over the encrypted HTTPS connection to your browser.
+Browser Rendering: The browser receives the response and renders the webpage using the DOM (Document Object Model), CSS, and JavaScript.
